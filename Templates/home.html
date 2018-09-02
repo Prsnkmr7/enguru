@@ -1,0 +1,50 @@
+<div ng-controller="homeController">
+    <table class="account-table full-width-grid">
+        <thead>
+            <tr class="grid-x account-table__head-row account-table__data-row">
+                <th>Auction Categories</th>
+                <th>Item Name</th>
+                <th>Item Description</th>
+                <th>Item Image</th>
+                <th>
+                    <span>Bid</span>
+                    <span class="date-head__icons-container">
+                        <button class="date-head__button" ng-click="sort(true,'bidAmount')" aria-label="Ascending order">
+                            <img class="date-head__sort-icon" src="../assets/img/sort-up-arrow.png">
+                        </button>
+                        <button class="date-head__button" ng-click="sort(false,'bidAmount')" aria-label="Descending order">
+                            <img class="date-head__sort-icon date-head__sort-icon--margin" src="../assets/img/sort-down-arrow.png">
+                        </button>
+                    </span>
+                </th>
+                <th>
+                    <span>Current</span>
+                    <span class="date-head__icons-container">
+                        <button class="date-head__button" ng-click="sort(true,'currentBid')" aria-label="Ascending order">
+                            <img class="date-head__sort-icon" src="../assets/img/sort-up-arrow.png">
+                        </button>
+                        <button class="date-head__button" ng-click="sort(false,'currentBid')" aria-label="Descending order">
+                            <img class="date-head__sort-icon date-head__sort-icon--margin" src="../assets/img/sort-down-arrow.png">
+                        </button>
+                    </span>
+                </th>
+                <th>Pagination</th>
+            </tr>
+        </thead>
+        <tbody class="account-table__body">
+            <tr class="account-table__data-row grid-x" ng-repeat="list in listItems |orderBy:orderByField:reverseSort">
+                <td class="account-table__date">{{list.auction}}</td>
+                <td class="account-table__date">{{list.itemName}}</td>
+                <td class="account-table__date">{{list.itemDescription}}</td>
+                <td class="account-table__date">
+                    <picture class="banner">
+                        <img src={{list.itemImage}} alt="Item Image" />
+                    </picture>
+                </td>
+                <td class="account-table__date">{{list.bidAmount}}</td>
+                <td class="account-table__date">{{list.currentBid}}</td>
+                <td class="account-table__date pagination" ng-click="gotoListPage(list.id)">Go to Item</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

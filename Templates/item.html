@@ -1,0 +1,122 @@
+<div ng-controller="listController">
+    <table class="account-table full-width-grid">
+        <thead>
+            <tr class="grid-x account-table__head-row account-table__data-row list-x">
+                <th>Item Image</th>
+                <th>Item Description</th>
+                <th>Current Bid</th>
+                <th>Ends In Timer</th>
+                <th>New bid</th>
+                <th>Create a new auction item</th>
+            </tr>
+        </thead>
+        <tbody class="account-table__body">
+            <tr class="account-table__data-row grid-x list-x">
+                <td class="account-table__date">
+                    <picture class="banner">
+                        <img src={{itemList.itemImage}} alt="Item Image" />
+                    </picture>
+                </td>
+                <td class="account-table__date">{{itemList.itemDescription}}</td>
+                <td class="account-table__date">{{itemList.currentBid}}</td>
+                <td class="account-table__date">{{itemList.endDateFormat}}</td>
+                <td class="account-table__date pagination" ng-click="toggleBidding(true)">Create a bid</td>
+                <td class="account-table__date pagination" ng-click="toggleAuction(true)">Create a new auction
+                    item</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="white-overlay" ng-if="showBidding">
+        <div class="white-overlay-back">
+            <form name="form" ng-submit="submitForm(form.$valid)" novalidate>
+                <div class="overlay-title-wrapr">
+                    <div class="overlay-title">Update the Bid</div>
+                </div>
+                <div class="modal-body">
+                    <!-- NAME -->
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" ng-model="user.name" required>
+                        <p ng-show="form.name.$error.required || form.name.$invalid && !form.name.$pristine " class="help-block">You
+                            name is required.</p>
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" ng-model="user.email" required>
+                        <p ng-show="form.email.$invalid && !form.email.$pristine" class="help-block">Enter
+                            a valid email.</p>
+                        <p ng-show="form.email.$error.required">Email is required.</p>
+                    </div>
+
+                    <!-- Bid Amount -->
+                    <div class="form-group">
+                        <label>Bid Amount</label>
+                        <input type="number" name="bidAmount" class="form-control" ng-model="user.bidAmount" required>
+                        <p ng-show="form.bidAmount.$invalid && !form.bidAmount.$pristine" class="help-block">Enter
+                            a valid amount.</p>
+                        <p ng-show="form.bidAmount.$error.required">Amount is required.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">OK</button>
+                    <button class="btn btn-warning" ng-click="toggleBidding(false)">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="white-overlay" ng-if="showAuction">
+        <div class="white-overlay-back">
+            <form name="form" ng-submit="submitAuctionForm(form.$valid)" novalidate>
+                <div class="overlay-title-wrapr">
+                    <div class="overlay-title">Create a auction</div>
+                </div>
+                <div class="modal-body">
+                    <!--Item NAME -->
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" name="itemname" class="form-control" ng-model="user.itemname" required>
+                        <p ng-show="form.itemname.$error.required || form.itemname.$invalid && !form.itemname.$pristine "
+                            class="help-block">Item
+                            name is required.</p>
+                    </div>
+                    <!--Item DESC -->
+                    <div class="form-group">
+                        <label>Item Description</label>
+                        <input type="text" name="itemdesc" class="form-control" ng-model="user.itemdesc" required>
+                        <p ng-show="form.itemdesc.$error.required || form.itemdesc.$invalid && !form.itemdesc.$pristine "
+                            class="help-block">Item
+                            name is required.</p>
+                    </div>
+
+
+                    <!-- Bid Amount -->
+                    <div class="form-group">
+                        <label>Bid Amount</label>
+                        <input type="number" name="aucbidAmount" class="form-control" ng-model="user.aucbidAmount"
+                            required>
+                        <p ng-show="form.aucbidAmount.$invalid && !form.aucbidAmount.$pristine" class="help-block">Enter
+                            a valid amount.</p>
+                        <p ng-show="form.aucbidAmount.$error.required">Amount is required.</p>
+                    </div>
+
+                    <!-- Current Bid -->
+                    <div class="form-group">
+                        <label>Current Bid</label>
+                        <input type="number" name="currentBid" class="form-control" ng-model="user.currentBid" required>
+                        <p ng-show="form.currentBid.$invalid && !form.currentBid.$pristine" class="help-block">Enter
+                            a valid amount.</p>
+                        <p ng-show="form.currentBid.$error.required">Amount is required.</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">OK</button>
+                    <button class="btn btn-warning" ng-click="toggleAuction(false)">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
